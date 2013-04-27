@@ -1,6 +1,7 @@
 package org.bytefire.ld48;
 
 import java.util.ArrayList;
+import org.bytefire.ld48.util.Location;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -27,39 +28,19 @@ public class Game{
     private void Game(String[] args){
         System.out.println("Initializing...");
         init();
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glLoadIdentity();
-        GL11.glOrtho(0, 640, 0, 480, 1, -1);
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        initEntities();
 
         for(float i = 0; !Display.isCloseRequested(); i++){
             long time = System.currentTimeMillis();
             System.out.println(i);
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-
-            // set the color of the quad (R,G,B,A)
-            GL11.glColor3f(1.0f,1.0f,1.0f);
-            // draw quad
-            GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f(i+100,100);
-                GL11.glVertex2f(i,100);
-                GL11.glVertex2f(i,100+100);
-                GL11.glVertex2f(i+100,100+100);
-            GL11.glEnd();
-            GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f(150,i);
-                GL11.glVertex2f(150+100,i);
-                GL11.glVertex2f(150+100,i+100);
-                GL11.glVertex2f(150,i+100);
-            GL11.glEnd();
-            GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f(250,90);
-                GL11.glVertex2f(250+100,90);
-                GL11.glVertex2f(250+100,90+100);
-                GL11.glVertex2f(250,90+100);
-            GL11.glEnd();
-            Display.update();
             long time2 = System.currentTimeMillis();
+
+            keyboard();
+
+            doPhysics(i);
+
+            doDraw(i);
+
             if (time2-time < 50) try{
                 Thread.sleep(50-(time2-time));
             } catch (InterruptedException e){}
@@ -73,6 +54,32 @@ public class Game{
         Display.setDisplayMode(new DisplayMode(640,480));
         Display.create();
         } catch (LWJGLException e) {}
+
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0, 640, 0, 480, 1, -1);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+    }
+
+    private void initEntities(){
+        gameEntities.add(new Player(new Location(this, 100D, 100D, 1D), true, true));
+    }
+
+    private void doPhysics(float i){
+        for (Entity e: gameEntities){
+            if (removeEntities.contains(e)) gameEntities.remove(e);
+            else e.doPhysics(this);
+        }
+    }
+
+    private void doDraw(float i){
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+        GL11.glColor3f(1.0f,1.0f,1.0f);
+        for (Entity e: gameEntities){
+            e.drawEntity(this);
+        }
+
+        Display.update();
     }
 
     public enum KeyState {Pressed, Released, Unpressed};
@@ -80,6 +87,7 @@ public class Game{
     private void keyboard(){
         while (!releasedKeys.isEmpty()){
             pressedKeys.remove(releasedKeys.get(0));
+            releasedKeys.remove(0);
         }
         while (Keyboard.next()){
             int key = Keyboard.getEventKey();
