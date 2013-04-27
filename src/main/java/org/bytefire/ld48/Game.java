@@ -25,30 +25,32 @@ public class Game{
     }
 
     private void Game(String[] args){
+        System.out.println("Initializing...");
         init();
-
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, 800, 0, 600, 1, -1);
+        GL11.glOrtho(0, 640, 0, 480, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-        while(!Display.isCloseRequested()){
+        for(float i = 0; !Display.isCloseRequested(); i++){
+            long time = System.currentTimeMillis();
+            System.out.println(i);
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
             // set the color of the quad (R,G,B,A)
             GL11.glColor3f(1.0f,1.0f,1.0f);
             // draw quad
             GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f(100,100);
-                GL11.glVertex2f(100+100,100);
-                GL11.glVertex2f(100+100,100+100);
-                GL11.glVertex2f(100,100+100);
+                GL11.glVertex2f(i+100,100);
+                GL11.glVertex2f(i,100);
+                GL11.glVertex2f(i,100+100);
+                GL11.glVertex2f(i+100,100+100);
             GL11.glEnd();
             GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f(150,150);
-                GL11.glVertex2f(150+100,150);
-                GL11.glVertex2f(150+100,150+100);
-                GL11.glVertex2f(150,150+100);
+                GL11.glVertex2f(150,i);
+                GL11.glVertex2f(150+100,i);
+                GL11.glVertex2f(150+100,i+100);
+                GL11.glVertex2f(150,i+100);
             GL11.glEnd();
             GL11.glBegin(GL11.GL_QUADS);
                 GL11.glVertex2f(250,90);
@@ -57,6 +59,10 @@ public class Game{
                 GL11.glVertex2f(250,90+100);
             GL11.glEnd();
             Display.update();
+            long time2 = System.currentTimeMillis();
+            if (time2-time < 50) try{
+                Thread.sleep(time2-time);
+            } catch (InterruptedException e){}
         }
         Display.destroy();
     }
