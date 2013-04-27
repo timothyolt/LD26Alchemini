@@ -61,7 +61,7 @@ public class Game{
             Display.update();
             long time2 = System.currentTimeMillis();
             if (time2-time < 50) try{
-                Thread.sleep(time2-time);
+                Thread.sleep(50-(time2-time));
             } catch (InterruptedException e){}
         }
         Display.destroy();
