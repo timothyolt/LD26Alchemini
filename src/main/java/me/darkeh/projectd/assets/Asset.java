@@ -53,6 +53,7 @@ public class Asset {
             else objectStream = new ObjectInputStream(new GZIPInputStream(new FileInputStream(name)));
             try {object = objectStream.readObject();} catch(ClassNotFoundException e) {}
         } catch (IOException e) {}
+        catch (NullPointerException e) {System.out.println("No resource map, moving on...");}
         finally {
             try {
                 if(objectStream != null) objectStream.close();
