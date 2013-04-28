@@ -15,14 +15,14 @@ public class ProjectD {
         Level levelExt = new Level((short) 1, new ArrayList<TexInfo>(), 16, 16);
         Level levelRes;
 
-        TexInfo texAir = new TexInfo(0, "Air", (short) 1, (short) 1);
-        TexInfo texDirt = new TexInfo(1, "Dirt", (short) 1, (short) 1);
+        TexInfo air = new TexInfo(0, "Air", (short) 1, (short) 1);
+        TexInfo water = new TexInfo(1, "Water", (short) 1, (short) 1);
+        TexInfo dirt = new TexInfo(2, "Dirt", (short) 1, (short) 1);
+        TexInfo grass = new TexInfo(3, "Grass", (short) 1, (short) 1);
+        TexInfo tallGrass = new TexInfo(4, "Tall Grass", (short) 1, (short) 1);
+        TexInfo gravel = new TexInfo(5, "Gravel", (short) 1, (short) 1);
 
-        levelExt.addTextureInstance(texAir, 0, 0);
-        levelExt.addTextureInstance(texDirt, 0, 0);
-        levelExt.addTextureInstance(texDirt, 1, 1);
-        levelExt.addTextureInstance(texDirt, 2, 2);
-        levelExt.addTextureInstance(texDirt, 3, 3);
+        levelExt.addTextureInstance(air, 0, 0);
 
         assetExtLevel. write(levelExt);
 
