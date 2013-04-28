@@ -1,7 +1,10 @@
 package org.bytefire.ld48;
 
 import java.util.ArrayList;
+import org.bytefire.ld48.util.Camera;
+import org.bytefire.ld48.util.Camera.Level;
 import org.bytefire.ld48.util.Location;
+import org.bytefire.ld48.util.Rect;
 import org.bytefire.ld48.util.Sprite;
 import org.bytefire.ld48.util.TextureLoader;
 import org.lwjgl.LWJGLException;
@@ -18,6 +21,9 @@ public class Game{
     private TextureLoader tex;
     private final int height;
     private final int width;
+    private final int viewHeight;
+    private final int viewWidth;
+    private Camera cam;
 
     private Game(){
         gameEntities = new ArrayList<Entity>();
@@ -27,6 +33,10 @@ public class Game{
         tex = new TextureLoader();
         height = 480;
         width = 640;
+        viewHeight = 120;
+        viewWidth = 160;
+        gameEntities.add(new Player(new Location(this, 100D, 100D, 1D), true, true));
+        cam = new Camera(new Rect(this, 0, 0, viewHeight, viewWidth), gameEntities.get(0));
     }
 
     public static void main(String[] args){
@@ -70,7 +80,7 @@ public class Game{
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
 
-        GL11.glOrtho(0, width, height, 0, 1, -1);
+        GL11.glOrtho(0, viewWidth, viewHeight, 0, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
 
@@ -78,10 +88,12 @@ public class Game{
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         GL11.glViewport(0, 0, width, height);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
     }
 
     private void initEntities(){
-        gameEntities.add(new Player(new Location(this, 100D, 100D, 1D), true, true));
+
     }
 
     private void doPhysics(float i){
@@ -93,11 +105,12 @@ public class Game{
 
     private void doDraw(float i){
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+System.out.println("doDraw");
+        cam.drawMap(Level.TEST);
         for (Entity e: gameEntities){
             e.drawEntity(this);
         }
-        Sprite test = getSprite("inv.png");
-        test.draw(100, 100);
+        getSprite("inventory.png").draw(59, 96);
         Display.update();
     }
 

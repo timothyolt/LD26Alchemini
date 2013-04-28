@@ -4,7 +4,6 @@ import org.bytefire.ld48.Game.KeyState;
 import org.bytefire.ld48.util.Location;
 import org.bytefire.ld48.util.Sprite;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 public class Player implements Entity{
     Location loc;
@@ -14,6 +13,9 @@ public class Player implements Entity{
         this.loc = loc;
         this.draw = draw;
         this.phys = physics;
+    }
+    public Game getGame(){
+        return loc.getGame();
     }
 
     public double getX(){
@@ -28,6 +30,10 @@ public class Player implements Entity{
         return loc.getZ();
     }
 
+    public Location getLoc(){
+        return loc;
+    }
+
     public void setX(double x){
         loc.setX(x);
     }
@@ -38,6 +44,10 @@ public class Player implements Entity{
 
     public void setZ(double z){
         loc.setZ(z);
+    }
+
+    public void setLoc(Location loc){
+        this.loc = loc;
     }
 
     public boolean getDraw(){
