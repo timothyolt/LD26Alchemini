@@ -2,6 +2,8 @@ package org.bytefire.ld48;
 
 import java.util.ArrayList;
 import org.bytefire.ld48.util.Location;
+import org.bytefire.ld48.util.Sprite;
+import org.bytefire.ld48.util.TextureLoader;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -9,15 +11,22 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 public class Game{
-    ArrayList<Entity> gameEntities;
-    ArrayList<Entity> removeEntities;
-    ArrayList<Integer> pressedKeys;
-    ArrayList<Integer> releasedKeys;
+    private ArrayList<Entity> gameEntities;
+    private ArrayList<Entity> removeEntities;
+    private ArrayList<Integer> pressedKeys;
+    private ArrayList<Integer> releasedKeys;
+    private TextureLoader tex;
+    private final int height;
+    private final int width;
+
     private Game(){
         gameEntities = new ArrayList<Entity>();
         removeEntities = new ArrayList<Entity>();
         pressedKeys = new ArrayList<Integer>();
         releasedKeys = new ArrayList<Integer>();
+        tex = new TextureLoader();
+        height = 480;
+        width = 640;
     }
 
     public static void main(String[] args){
@@ -51,14 +60,24 @@ public class Game{
     private void init(){
         try{
         Display.setTitle("Cow");
-        Display.setDisplayMode(new DisplayMode(640,480));
+        Display.setDisplayMode(new DisplayMode(width,height));
         Display.create();
         } catch (LWJGLException e) {}
 
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, 640, 0, 480, 1, -1);
+
+        GL11.glOrtho(0, width, height, 0, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glLoadIdentity();
+
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+        GL11.glViewport(0, 0, width, height);
     }
 
     private void initEntities(){
@@ -74,12 +93,16 @@ public class Game{
 
     private void doDraw(float i){
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        GL11.glColor3f(1.0f,1.0f,1.0f);
         for (Entity e: gameEntities){
             e.drawEntity(this);
         }
-
+        Sprite test = getSprite("inv.png");
+        test.draw(100, 100);
         Display.update();
+    }
+
+    public Sprite getSprite(String ref) {
+        return new Sprite(tex, ref);
     }
 
     public enum KeyState {Pressed, Released, Unpressed};

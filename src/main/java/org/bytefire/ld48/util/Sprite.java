@@ -14,7 +14,7 @@ public class Sprite {
     private int height;
     public Sprite(TextureLoader loader, String ref) {
         try {
-            texture = loader.getTexture("spaceinvaders/" + ref);
+            texture = loader.getTexture(ref);
             width = texture.getImageWidth();
             height = texture.getImageHeight();
         } catch (IOException ioe) {

@@ -2,6 +2,7 @@ package org.bytefire.ld48;
 
 import org.bytefire.ld48.Game.KeyState;
 import org.bytefire.ld48.util.Location;
+import org.bytefire.ld48.util.Sprite;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -49,12 +50,8 @@ public class Player implements Entity{
 
     public void drawEntity(Game game){
         if (draw){
-            GL11.glBegin(GL11.GL_QUADS);
-                GL11.glVertex2f((float)getX()+100,(float)getY());
-                GL11.glVertex2f((float)getX(),(float)getY());
-                GL11.glVertex2f((float)getX(),(float)getY()+100);
-                GL11.glVertex2f((float)getX()+100,(float)getY()+100);
-            GL11.glEnd();
+            Sprite spr = game.getSprite("player.png");
+            spr.draw((int)getX(), (int)getY());
         }
     }
 
@@ -70,8 +67,8 @@ public class Player implements Entity{
         if (phys){
             if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()+5);
             if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()-5);
-            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()+5);
-            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()-5);
+            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()-5);
+            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()+5);
         }
     }
 
