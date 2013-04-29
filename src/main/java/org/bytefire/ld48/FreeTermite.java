@@ -1,22 +1,26 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.bytefire.ld48;
 
-import org.bytefire.ld48.Game.KeyState;
-import org.bytefire.ld48.util.Camera;
 import org.bytefire.ld48.util.Location;
 import org.bytefire.ld48.util.Sprite;
-import org.bytefire.ld48.util.TileLoader;
-import org.lwjgl.input.Keyboard;
 
-public class Player implements Entity{
+
+/**
+ *
+ * @author kendall
+ */
+public class FreeTermite implements Entity{
+    
     Location loc;
     boolean draw;
     boolean phys;
-    TileLoader sprite;
-    public Player(Location loc, boolean draw, boolean physics){
+    public FreeTermite(Location loc, boolean draw, boolean physics){
         this.loc = loc;
         this.draw = draw;
         this.phys = physics;
-        sprite = new TileLoader("player.png");
     }
     public Game getGame(){
         return loc.getGame();
@@ -64,9 +68,8 @@ public class Player implements Entity{
 
     public void drawEntity(Game game){
         if (draw){
-            Location origin = game.getView().getBounds().getPoint1();
-            Sprite spr = game.getSprite("player.png");
-            spr.draw((int)getX() - (int)origin.getX(), (int)getY() - (int)origin.getY());
+            Sprite spr = game.getSprite("termite.png");
+            spr.draw((int)getX(), (int)getY());
         }
     }
 
@@ -77,14 +80,22 @@ public class Player implements Entity{
     public void setPhysics(boolean phys){
         this.phys = phys;
     }
-
+    
     public void doPhysics(Game game){
         if (phys){
-            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()-2);
-            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()+2);
-            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()+2);
-            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()-2);
+            if (game.getView().onScreen(this)){
+                if(game.getEntities().get(0).getX()>getX()) setX(getX()+5);
+                if(game.getEntities().get(0).getX()<getX()) setX(getX()-5);
+                if(game.getEntities().get(0).getY()>getY()) setY(getY()+5);
+                if(game.getEntities().get(0).getY()>getY()) setY(getY()-5);
+                
+                
+            }
         }
+    }        
+        
+    private void idleAI(){
+        
     }
 
     public void destroy(Game game){
@@ -95,12 +106,13 @@ public class Player implements Entity{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int getPotionTicks() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void setPotionState(PotionState state) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int getPotionTicks() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
+
