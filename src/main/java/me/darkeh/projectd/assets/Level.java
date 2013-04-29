@@ -140,6 +140,10 @@ public class Level implements Serializable{
     public void delTextureInstance(int v){
         delTextureInstance(v, 0, 0, 0);
     }
+    
+    public void setIDs(byte[][][][] array){
+        map = array;
+    }
 
     public void printIds(){
         for (int z = 0; z < zw; z++){

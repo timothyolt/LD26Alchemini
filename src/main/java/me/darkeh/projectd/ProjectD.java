@@ -22,8 +22,6 @@ public class ProjectD {
         TexInfo tallGrass = new TexInfo(4, "Tall Grass", (short) 1, (short) 1);
         TexInfo gravel = new TexInfo(5, "Gravel", (short) 1, (short) 1);
 
-        levelExt.addTextureInstance(air, 0, 0);
-
         assetExtLevel. write(levelExt);
 
         levelRes = (Level) assetResLevel.read();
