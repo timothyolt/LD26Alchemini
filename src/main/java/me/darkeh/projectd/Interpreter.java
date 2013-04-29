@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import me.darkeh.projectd.assets.Asset;
 import me.darkeh.projectd.assets.Level;
 import me.darkeh.projectd.assets.TexInfo;
@@ -45,6 +46,8 @@ public class Interpreter {
         byte[][][][] byteArray12 = null;
         byte[][][][] byteArray21 = null;
         byte[][][][] byteArray22 = null;
+        
+        
 
         for (int i = 0; i < 4; i++){
             InputStreamReader reader = null;
@@ -96,26 +99,60 @@ public class Interpreter {
                 default:
             }
         }
-
-        Level level11 = new Level((short)11, new ArrayList<TexInfo>(), 64, 64);
+        HashMap<Integer, TexInfo> textures = new HashMap<Integer, TexInfo>();
+        textures.put(1, new TexInfo(1, "TallGrass", 0, 0, 8, 8));
+        textures.put(2, new TexInfo(2, "Grass", 8, 0, 16, 8));
+        textures.put(3, new TexInfo(3, "Dirt", 16, 0, 24, 8));
+        textures.put(4, new TexInfo(4, "Gravel", 24, 0, 32, 8));
+        textures.put(5, new TexInfo(5, "Water1", 32, 0, 40, 8));
+        textures.put(6, new TexInfo(6, "RedFlower", 40, 0, 48, 8));
+        textures.put(7, new TexInfo(7, "BlueFlower", 48, 0, 56, 8));
+        textures.put(8, new TexInfo(8, "YellowFlower", 56, 0, 64, 8));
+        textures.put(9, new TexInfo(9, "UpLogAlt1", 64, 0, 72, 8));
+        textures.put(10, new TexInfo(10, "LogLeftAlt1", 72, 0, 80, 8));
+        
+        textures.put(11, new TexInfo(11, "TallGrassTrans1", 0, 8, 8, 16));
+        textures.put(12, new TexInfo(12, "GrassTrans1", 8, 8, 16, 16));
+        textures.put(13, new TexInfo(13, "DirtTrans1", 16, 8, 24, 16));
+        textures.put(14, new TexInfo(14, "GravelTrans1", 24, 8, 32, 16));
+        textures.put(15, new TexInfo(15, "Water2", 32, 8, 40, 16));
+        textures.put(16, new TexInfo(16, "RedPotion", 40, 8, 48, 16));
+        textures.put(17, new TexInfo(17, "BluePotion", 48, 8, 56, 16));
+        textures.put(18, new TexInfo(18, "YelowPotion", 56, 8, 64, 16));
+        textures.put(19, new TexInfo(19, "LogVerticalAlt1", 64, 8, 72, 16));
+        textures.put(20, new TexInfo(20, "LogHorizontalAlt1", 72, 8, 80, 16));
+        
+        textures.put(20, new TexInfo(21, "TallGrassTrans2", 0, 16, 8, 24));
+        textures.put(20, new TexInfo(22, "GrassTrans2", 8, 16, 16, 24));
+        textures.put(20, new TexInfo(23, "DirstTrans2", 16, 16, 24, 24));
+        textures.put(20, new TexInfo(24, "GravelTrans2", 24, 16, 32, 24));
+        textures.put(20, new TexInfo(25, "Water3", 32, 16, 40, 24));
+        textures.put(20, new TexInfo(26, "TallGrassTop", 40, 16, 48, 24));
+        textures.put(20, new TexInfo(27, "TallGrassShort", 48, 16, 56, 24));
+        textures.put(20, new TexInfo(28, "Reagent", 56, 16, 64, 24));
+        textures.put(20, new TexInfo(29, "LogHorizontalAlt1", 64, 16, 72, 24));
+        textures.put(20, new TexInfo(30, "LogHorizontalAlt1", 72, 16, 80, 24));
+        
+        
+        Level level11 = new Level((short)11,textures , 64, 64);
         level11.setIDs(byteArray11);
         level11.printIds();
         Asset asset11 = new Asset("Level1-1.d", false);
         asset11.write(level11);
 
-        Level level12 = new Level((short)12, new ArrayList<TexInfo>(), 64, 64);
+        Level level12 = new Level((short)12, new HashMap<Integer, TexInfo>(), 64, 64);
         level11.setIDs(byteArray11);
         level11.printIds();
         Asset asset12 = new Asset("Level1-2.d", false);
         asset12.write(level12);
 
-        Level level21 = new Level((short)21, new ArrayList<TexInfo>(), 64, 64);
+        Level level21 = new Level((short)21, new HashMap<Integer, TexInfo>(), 64, 64);
         level21.setIDs(byteArray21);
         level21.printIds();
         Asset asset21 = new Asset("Level2-1.d", false);
         asset21.write(level21);
 
-        Level level22 = new Level((short)22, new ArrayList<TexInfo>(), 64, 64);
+        Level level22 = new Level((short)22, new HashMap<Integer, TexInfo>(), 64, 64);
         level22.setIDs(byteArray22);
         level22.printIds();
         Asset asset22 = new Asset("Level2-2.d", false);
