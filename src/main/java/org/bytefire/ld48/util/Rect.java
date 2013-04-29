@@ -2,6 +2,7 @@ package org.bytefire.ld48.util;
 
 import org.bytefire.ld48.Entity;
 import org.bytefire.ld48.Game;
+import org.bytefire.ld48.util.Location;
 
 public class Rect {
     private Game g;

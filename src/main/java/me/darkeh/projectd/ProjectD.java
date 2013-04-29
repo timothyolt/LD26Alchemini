@@ -15,13 +15,6 @@ public class ProjectD {
         Level levelExt = new Level((short) 1, new ArrayList<TexInfo>(), 16, 16);
         Level levelRes;
 
-        TexInfo air = new TexInfo(0, "Air", (short) 1, (short) 1);
-        TexInfo water = new TexInfo(1, "Water", (short) 1, (short) 1);
-        TexInfo dirt = new TexInfo(2, "Dirt", (short) 1, (short) 1);
-        TexInfo grass = new TexInfo(3, "Grass", (short) 1, (short) 1);
-        TexInfo tallGrass = new TexInfo(4, "Tall Grass", (short) 1, (short) 1);
-        TexInfo gravel = new TexInfo(5, "Gravel", (short) 1, (short) 1);
-
         assetExtLevel. write(levelExt);
 
         levelRes = (Level) assetResLevel.read();
@@ -57,7 +50,7 @@ public class ProjectD {
 
             System.out.println("  Used Textures:");
             for (TexInfo tex : levelExt.getUsedTextures()) {
-                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getName());
+                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getRef());
                 System.out.println("      Dimension 1 Width:" + Integer.toString(tex.getDim1Width()));
                 System.out.println("      Dimension 2 Width:" + Integer.toString(tex.getDim2Width()));
                 System.out.println("      Dimension 3 Width:" + Integer.toString(tex.getDim3Width()));
@@ -97,7 +90,7 @@ public class ProjectD {
             }
             System.out.println("  Used Textures:");
             for (TexInfo tex : levelRes.getUsedTextures()) {
-                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getName());
+                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getRef());
                 System.out.println("      Dimension 1 Width:" + Integer.toString(tex.getDim1Width()));
                 System.out.println("      Dimension 2 Width:" + Integer.toString(tex.getDim2Width()));
                 System.out.println("      Dimension 3 Width:" + Integer.toString(tex.getDim3Width()));

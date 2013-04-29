@@ -62,7 +62,7 @@ public class Level implements Serializable{
         data = new byte[vw][xw][yw][zw];
     }
 
-    public short getID(){
+    public short getLevelID(){
         return id;
     }
 
@@ -140,7 +140,23 @@ public class Level implements Serializable{
     public void delTextureInstance(int v){
         delTextureInstance(v, 0, 0, 0);
     }
-    
+
+    public byte getID(int v, int x, int y, int z){
+        return map[v][x][y][z];
+    }
+
+    public byte getID(int v, int x, int y){
+        return getID(v, x, y, 0);
+    }
+
+    public byte getID(int v, int x){
+        return getID(v, x, 0);
+    }
+
+    public byte getID(int v){
+        return getID(v, 0, 0, 0);
+    }
+
     public void setIDs(byte[][][][] array){
         map = array;
     }

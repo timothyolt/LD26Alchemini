@@ -4,43 +4,24 @@ import java.io.Serializable;
 
 public class TexInfo implements Serializable{
     private int id;
-    private String name;
+    private String ref;
+    private int x;
+    private int y;
+    private int xx;
+    private int yy;
     private short vw;
     private short xw;
     private short yw;
     private short zw;
 
-    public TexInfo(int id, String name, short vw, short xw, short yw, short zw){
+    public TexInfo(int id, String ref, int x, int y, int xx, int yy){
         this.id = id;
-        this.name = name;
-        this.vw = vw;
-        this.xw = xw;
-        this.yw = yw;
-        this.zw = zw;
-    }
-
-    public TexInfo(int id, String name, short vw, short xw, short yw){
-        this.id = id;
-        this.name = name;
-        this.vw = vw;
-        this.xw = xw;
-        this.yw = yw;
-        this.zw = 1;
-    }
-
-    public TexInfo(int id, String name, short vw, short xw){
-        this.id = id;
-        this.name = name;
-        this.vw = vw;
-        this.xw = xw;
-        this.yw = 1;
-        this.zw = 1;
-    }
-
-    public TexInfo(int id, String name, short vw){
-        this.id = id;
-        this.name = name;
-        this.vw = vw;
+        this.ref = ref;
+        this.x = x;
+        this.y = y;
+        this.xx = xx;
+        this.yy = yy;
+        this.vw = 1;
         this.xw = 1;
         this.yw = 1;
         this.zw = 1;
@@ -50,8 +31,8 @@ public class TexInfo implements Serializable{
         return id;
     }
 
-    public String getName(){
-        return name;
+    public String getRef(){
+        return ref;
     }
 
     public short getDim1Width(){
@@ -68,5 +49,21 @@ public class TexInfo implements Serializable{
 
     public short getDim4Width(){
         return zw;
+    }
+
+    public void setDim1Width(short vw){
+        this.vw = vw;
+    }
+
+    public void setDim2Width(short xw){
+        this.xw = xw;
+    }
+
+    public void setDim3Width(short yw){
+        this.yw = yw;
+    }
+
+    public void setDim4Width(short zw){
+        this.zw = zw;
     }
 }

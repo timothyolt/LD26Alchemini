@@ -7,6 +7,7 @@ import org.bytefire.ld48.util.Location;
 import org.bytefire.ld48.util.Rect;
 import org.bytefire.ld48.util.Sprite;
 import org.bytefire.ld48.util.TextureLoader;
+import org.bytefire.ld48.util.TileLoader;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -19,6 +20,7 @@ public class Game{
     private ArrayList<Integer> pressedKeys;
     private ArrayList<Integer> releasedKeys;
     private TextureLoader tex;
+    private TileLoader terrain;
     private final int height;
     private final int width;
     private final int viewHeight;
@@ -31,6 +33,7 @@ public class Game{
         pressedKeys = new ArrayList<Integer>();
         releasedKeys = new ArrayList<Integer>();
         tex = new TextureLoader();
+        terrain = new TileLoader("terrain.png");
         height = 480;
         width = 640;
         viewHeight = 120;
