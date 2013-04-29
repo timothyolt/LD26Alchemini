@@ -14,7 +14,7 @@ public class Camera{
         this.view = view;
         this.center = center;
         terrain = new TileLoader("terrain.png");
-        ((Level)new Asset("Level1-1.d", true).read()).printIds();
+        ((Level)new Asset("Level1-2.d", true).read()).printIds();
     }
 
     public boolean onScreen(Entity e){
@@ -66,7 +66,7 @@ public class Camera{
                 TexInfo t2;
                 t2 = layer2.getTextureFromGrid(Math.abs(x), Math.abs(y));
                 Tile tile2 = new Tile(terrain, t2);
-                //tile2.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+                tile2.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
             }
         }
     }
