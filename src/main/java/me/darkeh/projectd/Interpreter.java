@@ -189,12 +189,23 @@ public class Interpreter {
         textures.put(82, new TexInfo(82, "GrassTrans8", 8, 64, 16, 72));
         textures.put(83, new TexInfo(83, "DirtTrans8", 16, 64, 24, 72));
         textures.put(84, new TexInfo(84, "GravelTrans8", 24, 64, 32, 72));
-        textures.put(85, new TexInfo(85, "NULL", 32, 64, 40, 72));
-        textures.put(86, new TexInfo(86, "NULL", 40, 64, 48, 72));
+        textures.put(85, new TexInfo(85, "WaterTrans5", 32, 64, 40, 72));
+        textures.put(86, new TexInfo(86, "WaterTrans6", 40, 64, 48, 72));
         textures.put(87, new TexInfo(87, "BigStone7", 48, 64, 56, 72));
         textures.put(88, new TexInfo(88, "BigStone8", 56, 64, 64, 72));
         textures.put(89, new TexInfo(89, "BigStone9", 64, 64, 72, 72));
         textures.put(90, new TexInfo(90, "Stone", 72, 64, 80, 72));
+
+        textures.put(91, new TexInfo(91, "WaterTrans1", 0, 72, 8, 80));
+        textures.put(92, new TexInfo(92, "WaterTrans2", 8, 72, 16, 80));
+        textures.put(93, new TexInfo(93, "WaterTrans3", 16, 72, 24, 80));
+        textures.put(94, new TexInfo(94, "WaterTrans4", 24, 72, 32, 80));
+        textures.put(95, new TexInfo(95, "WaterTrans7", 32, 72, 40, 80));
+        textures.put(96, new TexInfo(96, "WaterTrans8", 40, 72, 48, 80));
+        textures.put(97, new TexInfo(97, "WaterTrans9", 48, 72, 56, 80));
+        textures.put(98, new TexInfo(98, "WaterTrans10", 56, 72, 64, 80));
+        textures.put(99, new TexInfo(99, "WaterTrans11", 64, 72, 72, 80));
+        textures.put(100, new TexInfo(100, "WaterTrans12", 72, 72, 80, 80));
 
 
 
