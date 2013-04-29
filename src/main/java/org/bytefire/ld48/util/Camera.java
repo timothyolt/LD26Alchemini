@@ -50,39 +50,23 @@ public class Camera{
             default:
         }
 
-//        System.out.println("Vx:   " + Integer.toString((int)view.getPoint1().getX()));
-//        System.out.println("Vy:   " + Integer.toString((int)view.getPoint1().getY()));
-//        System.out.println("Vxx:   " + Integer.toString((int)view.getPoint2().getX()));
-//        System.out.println("Vyy:   " + Integer.toString((int)view.getPoint2().getY()));
-
-        int xStart = (int)view.getPoint1().getX() / 8;
-        int yStart = (int)view.getPoint1().getY() / 8;
-
         Location dummy = new Location(center.getGame(),
-                (center.getX() * -1) + (15 * 8),
-                (center.getY() * -1) + (20 * 8), 0);
-        System.out.println("Px:   " + Double.toString(center.getX()/8));
-        System.out.println("Py:   " + Double.toString(center.getY()/8));
-        System.out.println("Dx:   " + Double.toString(dummy.getX()/8));
-        System.out.println("Dy:   " + Double.toString(dummy.getY()/8));
+                (center.getX() * -1/2) + 75,
+                (center.getY() * -1/2) + 60, 0);
 
         if (layer1 != null && layer2 != null)
         for (int x = 0; x < 64; x++)
         for (int y = 0; y < 64; y++){
-//            System.out.println("---------");
-//            System.out.println(xStart);
-//            System.out.println(yStart);
-//            System.out.println(((view.getPoint2().getX() / 8)) + 1);
-//            System.out.println(((view.getPoint2().getY() / 8)) + 1);
-//            System.out.println(x);
-//            System.out.println(y);
-//            System.out.println(view.getPoint1().getX() + ((x - xStart)* 8));
-//            System.out.println(view.getPoint1().getY() + ((y - yStart)* 8));
-            if (Math.floor(dummy.distance(x * 4, y * 4)) < 80){
-                TexInfo t;
-                t = layer1.getTextureFromGrid(Math.abs(x), Math.abs(y));
-                Tile tile = new Tile(terrain, t);
-                tile.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+            if (Math.floor(dummy.distance(x * 4, y * 4)) < 55){
+                TexInfo t1;
+                t1 = layer1.getTextureFromGrid(Math.abs(x), Math.abs(y));
+                Tile tile1 = new Tile(terrain, t1);
+                tile1.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+
+                TexInfo t2;
+                t2 = layer2.getTextureFromGrid(Math.abs(x), Math.abs(y));
+                Tile tile2 = new Tile(terrain, t2);
+                //tile2.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
             }
         }
     }

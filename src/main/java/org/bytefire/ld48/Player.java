@@ -1,9 +1,10 @@
 package org.bytefire.ld48;
 
+import java.util.HashMap;
+import me.darkeh.projectd.assets.TexInfo;
 import org.bytefire.ld48.Game.KeyState;
-import org.bytefire.ld48.util.Camera;
 import org.bytefire.ld48.util.Location;
-import org.bytefire.ld48.util.Sprite;
+import org.bytefire.ld48.util.Tile;
 import org.bytefire.ld48.util.TileLoader;
 import org.lwjgl.input.Keyboard;
 
@@ -11,12 +12,15 @@ public class Player implements Entity{
     Location loc;
     boolean draw;
     boolean phys;
-    TileLoader sprite;
+    TileLoader spriteSheet;
+    private HashMap<Integer, TexInfo> tiles;
     public Player(Location loc, boolean draw, boolean physics){
         this.loc = loc;
         this.draw = draw;
         this.phys = physics;
-        sprite = new TileLoader("player.png");
+        spriteSheet = new TileLoader("player.png");
+        tiles = new HashMap<Integer, TexInfo>();
+        tiles.put(0, new TexInfo(0, "DownStill", 0, 0, 8, 8));
     }
     public Game getGame(){
         return loc.getGame();
@@ -65,8 +69,9 @@ public class Player implements Entity{
     public void drawEntity(Game game){
         if (draw){
             Location origin = game.getView().getBounds().getPoint1();
-            Sprite spr = game.getSprite("player.png");
-            spr.draw((int)getX() - (int)origin.getX(), (int)getY() - (int)origin.getY());
+            //Sprite spr = game.getSprite("player.png");
+            Tile spr = new Tile(spriteSheet, tiles.get(1));
+            spr.draw(76, 56);
         }
     }
 
@@ -80,10 +85,11 @@ public class Player implements Entity{
 
     public void doPhysics(Game game){
         if (phys){
-            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()-2);
-            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()+2);
-            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()+2);
-            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()-2);
+            final int speed = 2;
+            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()-speed);
+            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()+speed);
+            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()+speed);
+            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()-speed);
         }
     }
 

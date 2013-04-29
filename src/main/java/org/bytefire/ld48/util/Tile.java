@@ -16,7 +16,7 @@ public class Tile {
             }
             else if (tex == null) {
                 //System.out.println("Null TexInfo");
-                texture = loader.getTexture(72, 72, 80, 80);
+                texture = loader.getTexture(0, 0, 8, 8);
                 width = texture.getImageWidth();
                 height = texture.getImageHeight();
             }
