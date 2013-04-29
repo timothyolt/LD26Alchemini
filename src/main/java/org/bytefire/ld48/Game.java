@@ -20,7 +20,6 @@ public class Game{
     private ArrayList<Integer> pressedKeys;
     private ArrayList<Integer> releasedKeys;
     private TextureLoader tex;
-    private TileLoader terrain;
     private final int height;
     private final int width;
     private final int viewHeight;
@@ -33,7 +32,6 @@ public class Game{
         pressedKeys = new ArrayList<Integer>();
         releasedKeys = new ArrayList<Integer>();
         tex = new TextureLoader();
-        terrain = new TileLoader("terrain.png");
         height = 480;
         width = 640;
         viewHeight = 120;

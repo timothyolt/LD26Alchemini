@@ -2,6 +2,7 @@ package me.darkeh.projectd.assets;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Level implements Serializable{
     private short id;
@@ -10,11 +11,11 @@ public class Level implements Serializable{
     private int xw;
     private int yw;
     private int zw;
-    private ArrayList<TexInfo> textures;
+    private HashMap<Integer, TexInfo> textures;
     private byte[][][][] map;
     private byte[][][][] data;
 
-    public Level(short id, ArrayList<TexInfo> textures, int vw, int xw, int yw, int zw){
+    public Level(short id, HashMap<Integer, TexInfo> textures, int vw, int xw, int yw, int zw){
         this.id = id;
         this.dimensions = 4;
         this.vw = vw;
@@ -26,7 +27,7 @@ public class Level implements Serializable{
         data = new byte[vw][xw][yw][zw];
     }
 
-    public Level(short id, ArrayList<TexInfo> textures, int vw, int xw, int yw){
+    public Level(short id, HashMap<Integer, TexInfo> textures, int vw, int xw, int yw){
         this.id = id;
         this.dimensions = 3;
         this.vw = vw;
@@ -38,7 +39,7 @@ public class Level implements Serializable{
         data = new byte[vw][xw][yw][zw];
     }
 
-    public Level(short id, ArrayList<TexInfo> textures, int vw, int xw){
+    public Level(short id, HashMap<Integer, TexInfo> textures, int vw, int xw){
         this.id = id;
         this.dimensions = 2;
         this.vw = vw;
@@ -50,7 +51,7 @@ public class Level implements Serializable{
         data = new byte[vw][xw][yw][zw];
     }
 
-    public Level(short id, ArrayList<TexInfo> textures, int vw){
+    public Level(short id, HashMap<Integer, TexInfo> textures, int vw){
         this.id = id;
         this.dimensions = 1;
         this.vw = vw;
@@ -86,13 +87,13 @@ public class Level implements Serializable{
         return zw;
     }
 
-    public ArrayList<TexInfo> getUsedTextures(){
+    public HashMap<Integer, TexInfo> getUsedTextures(){
         return textures;
     }
 
     public void addTextureInstance(TexInfo texture, byte data, int v, int x, int y, int z){
-        if (!textures.contains(texture)) textures.add(texture);
-        map[v][x][y][z] = (byte)textures.indexOf(texture);
+        if (!textures.containsKey(texture.getID())) textures.put(texture.getID(), texture);
+        map[v][x][y][z] = (byte)texture.getID();
         this.data[v][x][y][z] = data;
     }
 
@@ -141,20 +142,25 @@ public class Level implements Serializable{
         delTextureInstance(v, 0, 0, 0);
     }
 
-    public byte getID(int v, int x, int y, int z){
-        return map[v][x][y][z];
+    public TexInfo getTextureFromID(int id){
+        return textures.get(id);
     }
 
-    public byte getID(int v, int x, int y){
-        return getID(v, x, y, 0);
+    public TexInfo getTextureFromGrid(int v, int x, int y, int z){
+        int texID = map[v][x][y][z];
+        return textures.get(texID);
     }
 
-    public byte getID(int v, int x){
-        return getID(v, x, 0);
+    public TexInfo getTextureFromGrid(int v, int x, int y){
+        return getTextureFromGrid(v, x, y, 0);
     }
 
-    public byte getID(int v){
-        return getID(v, 0, 0, 0);
+    public TexInfo getTextureFromGrid(int v, int x){
+        return getTextureFromGrid(v, x, 0, 0);
+    }
+
+    public TexInfo getTextureFromGrid(int v){
+        return getTextureFromGrid(v, 0, 0, 0);
     }
 
     public void setIDs(byte[][][][] array){

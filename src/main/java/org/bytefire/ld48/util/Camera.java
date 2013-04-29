@@ -1,16 +1,21 @@
 package org.bytefire.ld48.util;
 
+import java.io.IOException;
+import java.util.logging.Logger;
 import me.darkeh.projectd.assets.Asset;
 import me.darkeh.projectd.assets.Level;
+import me.darkeh.projectd.assets.TexInfo;
 import org.bytefire.ld48.Entity;
 
 public class Camera{
     private Rect view;
     private Entity center;
     public enum LevelID {TEST, ONE, TWO};
+    TileLoader terrain;
     public Camera(Rect view, Entity center){
         this.view = view;
         this.center = center;
+        terrain = new TileLoader("terrain.png");
     }
 
     public boolean onScreen(Entity e){
@@ -40,8 +45,10 @@ public class Camera{
         if (layer1 != null && layer2 != null);
         for (int x = (int)(((view.getPoint1().getX()) / 8) - 1); x <= ((view.getPoint1().getX()) / 8) + 1; x++)
         for (int y = (int)((view.getPoint1().getY()) / 8) - 1; y <= ((view.getPoint1().getY()) / 8) + 1; y++){
-            layer1.getID(y, x);
-            view.
+            TexInfo t = layer1.getTextureFromGrid(y, x);
+            try {
+                terrain.getTexture(t.getX1(), t.getY1(), t.getX2(), t.getY2());
+            } catch (IOException ex) {}
         }
     }
 }

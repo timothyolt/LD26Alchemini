@@ -24,7 +24,7 @@ public class ProjectD {
             System.out.println("Could not locate external resource \'extLevel.d\'!");
         } else {
             System.out.println("External Level:");
-            System.out.println("  ID:" + Short.toString(levelExt.getID()));
+            System.out.println("  ID:" + Short.toString(levelExt.getLevelID()));
             Short dim = levelExt.getDimensions();
             System.out.println("  Dimensions:" + Short.toString(dim));
             switch (dim) {
@@ -65,7 +65,7 @@ public class ProjectD {
             System.out.println("Could not locate internal level asset resource!");
         } else {
             System.out.println("Resource Level:");
-            System.out.println("  ID:" + Short.toString(levelRes.getID()));
+            System.out.println("  ID:" + Short.toString(levelRes.getLevelID()));
             Short dim2 = levelRes.getDimensions();
             System.out.println("  Dimensions:" + Short.toString(dim2));
             switch (dim2) {

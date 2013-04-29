@@ -66,4 +66,36 @@ public class TexInfo implements Serializable{
     public void setDim4Width(short zw){
         this.zw = zw;
     }
+
+    public int getX1(){
+        return x;
+    }
+
+    public int getX2(){
+        return xx;
+    }
+
+    public int getY1(){
+        return y;
+    }
+
+    public int getY2(){
+        return yy;
+    }
+
+    public void setX1(int x){
+        this.x = x;
+    }
+
+    public void setX2(int xx){
+        this.xx = xx;
+    }
+
+    public void setY1(int y){
+        this.y = y;
+    }
+
+    public void setY2(int yy){
+        this.yy = yy;
+    }
 }
