@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import me.darkeh.projectd.assets.Asset;
 import me.darkeh.projectd.assets.Level;
@@ -46,8 +45,8 @@ public class Interpreter {
         byte[][][][] byteArray12 = null;
         byte[][][][] byteArray21 = null;
         byte[][][][] byteArray22 = null;
-        
-        
+
+
 
         for (int i = 0; i < 4; i++){
             InputStreamReader reader = null;
@@ -108,9 +107,9 @@ public class Interpreter {
         textures.put(6, new TexInfo(6, "RedFlower", 40, 0, 48, 8));
         textures.put(7, new TexInfo(7, "BlueFlower", 48, 0, 56, 8));
         textures.put(8, new TexInfo(8, "YellowFlower", 56, 0, 64, 8));
-        textures.put(9, new TexInfo(9, "UpLogAlt1", 64, 0, 72, 8));
-        textures.put(10, new TexInfo(10, "LogLeftAlt1", 72, 0, 80, 8));
-        
+        textures.put(9, new TexInfo(9, "LogVert1Alt1", 64, 0, 72, 8));
+        textures.put(10, new TexInfo(10, "LogHor1Alt1", 72, 0, 80, 8));
+
         textures.put(11, new TexInfo(11, "TallGrassTrans1", 0, 8, 8, 16));
         textures.put(12, new TexInfo(12, "GrassTrans1", 8, 8, 16, 16));
         textures.put(13, new TexInfo(13, "DirtTrans1", 16, 8, 24, 16));
@@ -119,9 +118,9 @@ public class Interpreter {
         textures.put(16, new TexInfo(16, "RedPotion", 40, 8, 48, 16));
         textures.put(17, new TexInfo(17, "BluePotion", 48, 8, 56, 16));
         textures.put(18, new TexInfo(18, "YelowPotion", 56, 8, 64, 16));
-        textures.put(19, new TexInfo(19, "LogVertAlt1", 64, 8, 72, 16));
-        textures.put(20, new TexInfo(20, "LogHorizAlt1", 72, 8, 80, 16));
-        
+        textures.put(19, new TexInfo(19, "LogVert2Alt1", 64, 8, 72, 16));
+        textures.put(20, new TexInfo(20, "LogHor2Alt1", 72, 8, 80, 16));
+
         textures.put(21, new TexInfo(21, "TallGrassTrans2", 0, 16, 8, 24));
         textures.put(22, new TexInfo(22, "GrassTrans2", 8, 16, 16, 24));
         textures.put(23, new TexInfo(23, "DirtTrans2", 16, 16, 24, 24));
@@ -130,9 +129,9 @@ public class Interpreter {
         textures.put(26, new TexInfo(26, "TallGrassTop", 40, 16, 48, 24));
         textures.put(27, new TexInfo(27, "TallGrassShort", 48, 16, 56, 24));
         textures.put(28, new TexInfo(28, "Reagent", 56, 16, 64, 24));
-        textures.put(29, new TexInfo(29, "LogDownAlt1", 64, 16, 72, 24));
-        textures.put(30, new TexInfo(30, "LogRightAlt1", 72, 16, 80, 24));
-        
+        textures.put(29, new TexInfo(29, "LogVert3Alt1", 64, 16, 72, 24));
+        textures.put(30, new TexInfo(30, "LogHor3Alt1", 72, 16, 80, 24));
+
         textures.put(31, new TexInfo(31, "TallGrassTrans3", 0, 24, 8, 32));
         textures.put(32, new TexInfo(32, "GrassTrans3", 8, 24, 16, 32));
         textures.put(33, new TexInfo(33, "DirtTrans3", 16, 24, 24, 32));
@@ -143,35 +142,35 @@ public class Interpreter {
         textures.put(38, new TexInfo(38, "LogCorner2", 56, 24, 64, 32));
         textures.put(39, new TexInfo(39, "LogCorner3", 64, 24, 72, 32));
         textures.put(40, new TexInfo(40, "LogCorner4", 72, 24, 80, 32));
-           
+
         textures.put(41, new TexInfo(41, "TallGrassTrans4", 0, 32, 8, 40));
         textures.put(42, new TexInfo(42, "GrassTrans4", 8, 32, 16, 40));
         textures.put(43, new TexInfo(43, "DirtTrans4", 16, 32, 24, 40));
         textures.put(44, new TexInfo(44, "GravelTrans4", 24, 32, 32, 40));
-        textures.put(45, new TexInfo(45, "LogUpAlt2", 32, 32, 40, 40));
-        textures.put(46, new TexInfo(46, "LogRightAlt2", 40, 32, 48, 40));
+        textures.put(45, new TexInfo(45, "LogVert3Alt2", 32, 32, 40, 40));
+        textures.put(46, new TexInfo(46, "LogHor3Alt2", 40, 32, 48, 40));
         textures.put(47, new TexInfo(47, "LogCorner5", 48, 32, 56, 40));
         textures.put(48, new TexInfo(48, "LogCorner6", 56, 32, 64, 40));
         textures.put(49, new TexInfo(49, "LogCorner7", 64, 32, 72, 40));
         textures.put(50, new TexInfo(50, "LogCorner8", 72, 32, 80, 40));
-        
+
         textures.put(51, new TexInfo(51, "TallGrassTrans5", 0, 40, 8, 48));
         textures.put(52, new TexInfo(52, "GrassTrans5", 8, 40, 16, 48));
         textures.put(53, new TexInfo(53, "DirtTrans5", 16, 40, 24, 48));
         textures.put(54, new TexInfo(54, "GravelTrans5", 24, 40, 32, 48));
-        textures.put(55, new TexInfo(55, "LogVertAlt2", 32, 40, 40, 48));
-        textures.put(56, new TexInfo(56, "LogHorizAlt2", 40, 40, 48, 48));
+        textures.put(55, new TexInfo(55, "LogVert2Alt2", 32, 40, 40, 48));
+        textures.put(56, new TexInfo(56, "LogHor2Alt2", 40, 40, 48, 48));
         textures.put(57, new TexInfo(57, "StoneHoriz1", 48, 40, 56, 48));
         textures.put(58, new TexInfo(58, "StoneHoriz2", 56, 40, 64, 48));
         textures.put(58, new TexInfo(59, "StoneHoriz3", 64, 40, 72, 48));
         textures.put(60, new TexInfo(60, "StoneVert1", 72, 40, 80, 48));
-        
+
         textures.put(61, new TexInfo(61, "TallGrassTrans6", 0, 48, 8, 56));
         textures.put(62, new TexInfo(62, "GrassTrans6", 8, 48, 16, 56));
         textures.put(63, new TexInfo(63, "DirtTrans6", 16, 48, 24, 56));
         textures.put(64, new TexInfo(64, "GravelTrans6", 24, 48, 32, 56));
-        textures.put(65, new TexInfo(65, "LogVert1Alt2", 32, 48, 40, 56));
-        textures.put(66, new TexInfo(66, "LogHoriz1Alt2", 40, 48, 48, 56));
+        textures.put(65, new TexInfo(65, "LogVert3Alt2", 32, 48, 40, 56));
+        textures.put(66, new TexInfo(66, "LogHor3Alt2", 40, 48, 48, 56));
         textures.put(67, new TexInfo(67, "BigStone1", 48, 48, 56, 56));
         textures.put(68, new TexInfo(68, "BigStone2", 56, 48, 64, 56));
         textures.put(69, new TexInfo(69, "BigStone3", 64, 48, 72, 56));
@@ -198,10 +197,10 @@ public class Interpreter {
         textures.put(88, new TexInfo(88, "BigStone8", 56, 64, 64, 72));
         textures.put(89, new TexInfo(89, "BigStone9", 64, 64, 72, 72));
         textures.put(90, new TexInfo(90, "Stone", 72, 64, 80, 72));
-        
-        
-        
-        
+
+
+
+
         Level level11 = new Level((short)11,textures , 64, 64);
         level11.setIDs(byteArray11);
         level11.printIds();

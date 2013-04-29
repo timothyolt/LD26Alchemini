@@ -1,6 +1,6 @@
 package me.darkeh.projectd;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import me.darkeh.projectd.assets.Asset;
 import me.darkeh.projectd.assets.Asset.Container;
 import me.darkeh.projectd.assets.Level;
@@ -12,7 +12,7 @@ public class ProjectD {
         Asset assetExtLevel = new Asset("extLevel.d", false);
         Asset assetResLevel = new Asset(Container.LEVEL);
 
-        Level levelExt = new Level((short) 1, new ArrayList<TexInfo>(), 16, 16);
+        Level levelExt = new Level((short) 1, new HashMap<Integer, TexInfo>(), 16, 16);
         Level levelRes;
 
         assetExtLevel. write(levelExt);
@@ -49,13 +49,13 @@ public class ProjectD {
             }
 
             System.out.println("  Used Textures:");
-            for (TexInfo tex : levelExt.getUsedTextures()) {
-                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getRef());
-                System.out.println("      Dimension 1 Width:" + Integer.toString(tex.getDim1Width()));
-                System.out.println("      Dimension 2 Width:" + Integer.toString(tex.getDim2Width()));
-                System.out.println("      Dimension 3 Width:" + Integer.toString(tex.getDim3Width()));
-                System.out.println("      Dimension 4 Width:" + Integer.toString(tex.getDim4Width()));
-            }
+//            for (TexInfo tex : levelExt.getUsedTextures()) {
+//                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getRef());
+//                System.out.println("      Dimension 1 Width:" + Integer.toString(tex.getDim1Width()));
+//                System.out.println("      Dimension 2 Width:" + Integer.toString(tex.getDim2Width()));
+//                System.out.println("      Dimension 3 Width:" + Integer.toString(tex.getDim3Width()));
+//                System.out.println("      Dimension 4 Width:" + Integer.toString(tex.getDim4Width()));
+//            }
             System.out.println("  Map:");
             levelExt.printIds();
             System.out.println("  Data:");
@@ -89,13 +89,13 @@ public class ProjectD {
                     break;
             }
             System.out.println("  Used Textures:");
-            for (TexInfo tex : levelRes.getUsedTextures()) {
-                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getRef());
-                System.out.println("      Dimension 1 Width:" + Integer.toString(tex.getDim1Width()));
-                System.out.println("      Dimension 2 Width:" + Integer.toString(tex.getDim2Width()));
-                System.out.println("      Dimension 3 Width:" + Integer.toString(tex.getDim3Width()));
-                System.out.println("      Dimension 4 Width:" + Integer.toString(tex.getDim4Width()));
-            }
+//            for (TexInfo tex : levelRes.getUsedTextures()) {
+//                System.out.println("    " + Integer.toString(tex.getID()) + ": " + tex.getRef());
+//                System.out.println("      Dimension 1 Width:" + Integer.toString(tex.getDim1Width()));
+//                System.out.println("      Dimension 2 Width:" + Integer.toString(tex.getDim2Width()));
+//                System.out.println("      Dimension 3 Width:" + Integer.toString(tex.getDim3Width()));
+//                System.out.println("      Dimension 4 Width:" + Integer.toString(tex.getDim4Width()));
+//            }
             System.out.println("  Map:");
             levelRes.printIds();
             System.out.println("  Data:");
