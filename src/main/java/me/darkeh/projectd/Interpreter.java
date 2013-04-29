@@ -217,8 +217,8 @@ public class Interpreter {
         asset11.write(level11);
 
         Level level12 = new Level((short)12, new HashMap<Integer, TexInfo>(), 64, 64);
-        level11.setIDs(byteArray11);
-        level11.printIds();
+        level12.setIDs(byteArray12);
+        level12.printIds();
         Asset asset12 = new Asset("Level1-2.d", false);
         asset12.write(level12);
 
