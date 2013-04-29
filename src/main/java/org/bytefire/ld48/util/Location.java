@@ -41,4 +41,8 @@ public class Location {
     public void setZ(double z){
         this.z = z;
     }
+
+    public double distance(int xx, int yy){
+        return Math.sqrt(((xx - x)*(xx - x))+((yy - y)*(yy - y)));
+    }
 }

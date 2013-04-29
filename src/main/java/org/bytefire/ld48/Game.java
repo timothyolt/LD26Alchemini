@@ -30,6 +30,7 @@ public class Game{
         removeEntities = new ArrayList<Entity>();
         pressedKeys = new ArrayList<Integer>();
         releasedKeys = new ArrayList<Integer>();
+        tex = new TextureLoader();
         height = 480;
         width = 640;
         viewHeight = 120;
@@ -91,6 +92,10 @@ public class Game{
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
     }
 
+    public Player getPlayer(){
+        return (Player)gameEntities.get(0);
+    }
+
     private void initEntities(){
 
     }
@@ -104,13 +109,16 @@ public class Game{
 
     private void doDraw(float i){
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-System.out.println("doDraw");
         cam.drawMap(LevelID.TEST);
         for (Entity e: gameEntities){
             e.drawEntity(this);
         }
         getSprite("inventory.png").draw(59, 96);
         Display.update();
+    }
+
+    public Camera getView(){
+        return cam;
     }
 
     public Sprite getSprite(String ref) {

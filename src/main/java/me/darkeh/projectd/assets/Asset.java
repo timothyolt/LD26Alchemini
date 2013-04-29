@@ -49,7 +49,7 @@ public class Asset {
         Object object = null;
         ObjectInputStream objectStream = null;
         try {
-            if (resource) objectStream = new ObjectInputStream(new GZIPInputStream(ClassLoader.getSystemResourceAsStream("me/darkeh/projectd/resources/levels.d")));
+            if (resource) objectStream = new ObjectInputStream(new GZIPInputStream(ClassLoader.getSystemResourceAsStream(name)));
             else objectStream = new ObjectInputStream(new GZIPInputStream(new FileInputStream(name)));
             try {object = objectStream.readObject();} catch(ClassNotFoundException e) {}
         } catch (IOException e) {}

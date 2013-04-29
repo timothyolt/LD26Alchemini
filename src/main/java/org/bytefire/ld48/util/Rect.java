@@ -55,10 +55,10 @@ public class Rect {
     public void setLocation(Location loc){
         int w = (xx - x)/2;
         int h = (yy - y)/2;
+        xx = (int)loc.getX() + (xx - x) - w;
+        yy = (int)loc.getY() + (yy - y) - h;
         x = (int)loc.getX() - w;
-        xx = (int)loc.getX() + w;
         y = (int)loc.getY() - h;
-        yy = (int)loc.getY() + h;
     }
 
     public int getWidth(){

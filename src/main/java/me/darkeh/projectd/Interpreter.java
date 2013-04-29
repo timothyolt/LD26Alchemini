@@ -65,14 +65,12 @@ public class Interpreter {
                 default:
             }
 
-            StringBuilder string = new StringBuilder();
-            for (int charnumber = 0; charnumber <= 4096; charnumber++){
-                try {
-                    string.append(String.copyValueOf(Character.toChars(reader.read())));
-
-                } catch (IOException ex) {}
-            }
-            String[] array = string.toString().split(",");
+            String string = new String();
+            try {for (int charnumber = 0; reader.ready(); charnumber++){
+                    string = string.concat(String.copyValueOf(Character.toChars(reader.read())));
+            }} catch (IOException e) {e.printStackTrace(System.out);};
+            System.out.println(string.length());
+            String[] array = string.split(",");
             byte[][][][] byteArray = new byte[64][64][1][1];
             for (int y = 0; y < 64; y++) for(int x = 0; x < 64; x++){
                 if (y*64 + x < array.length - 1){

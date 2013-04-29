@@ -1,18 +1,22 @@
 package org.bytefire.ld48;
 
 import org.bytefire.ld48.Game.KeyState;
+import org.bytefire.ld48.util.Camera;
 import org.bytefire.ld48.util.Location;
 import org.bytefire.ld48.util.Sprite;
+import org.bytefire.ld48.util.TileLoader;
 import org.lwjgl.input.Keyboard;
 
 public class Player implements Entity{
     Location loc;
     boolean draw;
     boolean phys;
+    TileLoader sprite;
     public Player(Location loc, boolean draw, boolean physics){
         this.loc = loc;
         this.draw = draw;
         this.phys = physics;
+        sprite = new TileLoader("player.png");
     }
     public Game getGame(){
         return loc.getGame();
@@ -60,8 +64,9 @@ public class Player implements Entity{
 
     public void drawEntity(Game game){
         if (draw){
+            Location origin = game.getView().getBounds().getPoint1();
             Sprite spr = game.getSprite("player.png");
-            spr.draw((int)getX(), (int)getY());
+            spr.draw((int)getX() - (int)origin.getX(), (int)getY() - (int)origin.getY());
         }
     }
 
@@ -75,10 +80,10 @@ public class Player implements Entity{
 
     public void doPhysics(Game game){
         if (phys){
-            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()+5);
-            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()-5);
-            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()-5);
-            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()+5);
+            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()-2);
+            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()+2);
+            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()+2);
+            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()-2);
         }
     }
 

@@ -1,7 +1,5 @@
 package org.bytefire.ld48.util;
 
-import java.io.IOException;
-import java.util.logging.Logger;
 import me.darkeh.projectd.assets.Asset;
 import me.darkeh.projectd.assets.Level;
 import me.darkeh.projectd.assets.TexInfo;
@@ -16,6 +14,7 @@ public class Camera{
         this.view = view;
         this.center = center;
         terrain = new TileLoader("terrain.png");
+        ((Level)new Asset("Level1-1.d", true).read()).printIds();
     }
 
     public boolean onScreen(Entity e){
@@ -27,13 +26,22 @@ public class Camera{
         return view.isWithin(x, y);
     }
 
+    public Rect getBounds(){
+        return view;
+    }
+
     public void drawMap(LevelID levelID){
+        int w = view.getWidth();
+        int h = view.getHeight();
+        view.setPoint1(new Location(center.getGame(), center.getX() - 76, center.getY() - 56, 0));
+        view.setWidth(w);
+        view.setHeight(h);
         Level layer1 = null;
         Level layer2 = null;
         switch(levelID){
             case TEST:
-                layer1 = (Level)(new Asset("level1-1.d", true).read());
-                layer2 = (Level)(new Asset("level1-2.d", true).read());
+                layer1 = (Level)(new Asset("Level1-1.d", true).read());
+                layer2 = (Level)(new Asset("Level1-2.d", true).read());
                 break;
             case ONE:
                 break;
@@ -42,13 +50,40 @@ public class Camera{
             default:
         }
 
-        if (layer1 != null && layer2 != null);
-        for (int x = (int)(((view.getPoint1().getX()) / 8) - 1); x <= ((view.getPoint1().getX()) / 8) + 1; x++)
-        for (int y = (int)((view.getPoint1().getY()) / 8) - 1; y <= ((view.getPoint1().getY()) / 8) + 1; y++){
-            TexInfo t = layer1.getTextureFromGrid(y, x);
-            try {
-                terrain.getTexture(t.getX1(), t.getY1(), t.getX2(), t.getY2());
-            } catch (IOException ex) {}
+//        System.out.println("Vx:   " + Integer.toString((int)view.getPoint1().getX()));
+//        System.out.println("Vy:   " + Integer.toString((int)view.getPoint1().getY()));
+//        System.out.println("Vxx:   " + Integer.toString((int)view.getPoint2().getX()));
+//        System.out.println("Vyy:   " + Integer.toString((int)view.getPoint2().getY()));
+
+        int xStart = (int)view.getPoint1().getX() / 8;
+        int yStart = (int)view.getPoint1().getY() / 8;
+
+        Location dummy = new Location(center.getGame(),
+                (center.getX() * -1) + (15 * 8),
+                (center.getY() * -1) + (20 * 8), 0);
+        System.out.println("Px:   " + Double.toString(center.getX()/8));
+        System.out.println("Py:   " + Double.toString(center.getY()/8));
+        System.out.println("Dx:   " + Double.toString(dummy.getX()/8));
+        System.out.println("Dy:   " + Double.toString(dummy.getY()/8));
+
+        if (layer1 != null && layer2 != null)
+        for (int x = 0; x < 64; x++)
+        for (int y = 0; y < 64; y++){
+//            System.out.println("---------");
+//            System.out.println(xStart);
+//            System.out.println(yStart);
+//            System.out.println(((view.getPoint2().getX() / 8)) + 1);
+//            System.out.println(((view.getPoint2().getY() / 8)) + 1);
+//            System.out.println(x);
+//            System.out.println(y);
+//            System.out.println(view.getPoint1().getX() + ((x - xStart)* 8));
+//            System.out.println(view.getPoint1().getY() + ((y - yStart)* 8));
+            if (Math.floor(dummy.distance(x * 4, y * 4)) < 80){
+                TexInfo t;
+                t = layer1.getTextureFromGrid(Math.abs(x), Math.abs(y));
+                Tile tile = new Tile(terrain, t);
+                tile.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+            }
         }
     }
 }

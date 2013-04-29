@@ -1,6 +1,7 @@
 package org.bytefire.ld48.util;
 
 import java.io.IOException;
+import me.darkeh.projectd.assets.TexInfo;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -8,13 +9,22 @@ public class Tile {
     private Texture texture;
     private int width;
     private int height;
-    public Tile(TileLoader loader, int tileID) {
+    public Tile(TileLoader loader, TexInfo tex) {
         try {
-            int x = (tileID % 10);
-            int y = (int)Math.floor(tileID/10) + 1;
-            texture = loader.getTexture(x, y, x + 8, y + 8);
-            width = texture.getImageWidth();
-            height = texture.getImageHeight();
+            if (loader == null) {
+                System.out.println("Null Loader");
+            }
+            else if (tex == null) {
+                //System.out.println("Null TexInfo");
+                texture = loader.getTexture(72, 72, 80, 80);
+                width = texture.getImageWidth();
+                height = texture.getImageHeight();
+            }
+            else{
+                texture = loader.getTexture(tex.getX1(), tex.getY1(), tex.getX2(), tex.getY2());
+                width = texture.getImageWidth();
+                height = texture.getImageHeight();
+            }
         } catch (IOException ioe) {
             ioe.printStackTrace();
           System.exit(-1);
