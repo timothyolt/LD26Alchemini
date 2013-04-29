@@ -1,26 +1,26 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.bytefire.ld48;
 
-import java.util.HashMap;
-import me.darkeh.projectd.assets.TexInfo;
-import org.bytefire.ld48.Game.KeyState;
 import org.bytefire.ld48.util.Location;
-import org.bytefire.ld48.util.Tile;
-import org.bytefire.ld48.util.TileLoader;
-import org.lwjgl.input.Keyboard;
+import org.bytefire.ld48.util.Sprite;
 
-public class Player implements Entity{
+
+/**
+ *
+ * @author kendall
+ */
+public class FreeAnt implements Entity{
+    
     Location loc;
     boolean draw;
     boolean phys;
-    TileLoader spriteSheet;
-    private HashMap<Integer, TexInfo> tiles;
-    public Player(Location loc, boolean draw, boolean physics){
+    public FreeAnt(Location loc, boolean draw, boolean physics){
         this.loc = loc;
         this.draw = draw;
         this.phys = physics;
-        spriteSheet = new TileLoader("player.png");
-        tiles = new HashMap<Integer, TexInfo>();
-        tiles.put(0, new TexInfo(0, "DownStill", 0, 0, 8, 8));
     }
     public Game getGame(){
         return loc.getGame();
@@ -68,10 +68,8 @@ public class Player implements Entity{
 
     public void drawEntity(Game game){
         if (draw){
-            Location origin = game.getView().getBounds().getPoint1();
-            //Sprite spr = game.getSprite("player.png");
-            Tile spr = new Tile(spriteSheet, tiles.get(1));
-            spr.draw(76, 56);
+            Sprite spr = game.getSprite("ant.png");
+            spr.draw((int)getX(), (int)getY());
         }
     }
 
@@ -82,30 +80,37 @@ public class Player implements Entity{
     public void setPhysics(boolean phys){
         this.phys = phys;
     }
-
+    
     public void doPhysics(Game game){
         if (phys){
-            final int speed = 2;
-            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()-speed);
-            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()+speed);
-            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()+speed);
-            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()-speed);
+            if (game.getView().onScreen(this)){
+                if(game.getEntities().get(0).getX()>getX()) setX(getX()+5);
+                if(game.getEntities().get(0).getX()<getX()) setX(getX()-5);
+                if(game.getEntities().get(0).getY()>getY()) setY(getY()+5);
+                if(game.getEntities().get(0).getY()>getY()) setY(getY()-5);
+                
+                
+            }
         }
+    }        
+        
+    private void idleAI(){
+        
     }
 
     public void destroy(Game game){
         game.removeEntity(this);
     }
 
-    public PotionState getPotionState() {
+    public Entity.PotionState getPotionState() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setPotionState(Entity.PotionState state) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getPotionTicks() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setPotionState(PotionState state) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -1,8 +1,10 @@
 package org.bytefire.ld48;
 
 import org.bytefire.ld48.util.Location;
-
 public interface Entity {
+    
+    public enum PotionState {NORMAL, BIG, STRONG, SMALL};
+    
     Game getGame();
 
     double getX();
@@ -32,6 +34,12 @@ public interface Entity {
     void setPhysics(boolean phys);
 
     void doPhysics(Game game);
+    
+    PotionState getPotionState();
+    
+    int getPotionTicks();
+    
+    void setPotionState(PotionState state);
 
     void destroy(Game game);
 }
