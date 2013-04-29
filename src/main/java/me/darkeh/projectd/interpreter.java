@@ -100,6 +100,7 @@ public class Interpreter {
             }
         }
         HashMap<Integer, TexInfo> textures = new HashMap<Integer, TexInfo>();
+        textures.put(0, new TexInfo(0, "Air", -1, -1, -1, -1));
         textures.put(1, new TexInfo(1, "TallGrass", 0, 0, 8, 8));
         textures.put(2, new TexInfo(2, "Grass", 8, 0, 16, 8));
         textures.put(3, new TexInfo(3, "Dirt", 16, 0, 24, 8));
