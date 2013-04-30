@@ -4,8 +4,11 @@
  */
 package org.bytefire.ld48;
 
+import java.util.HashMap;
+import me.darkeh.projectd.assets.TexInfo;
 import org.bytefire.ld48.util.Location;
 import org.bytefire.ld48.util.Sprite;
+import org.bytefire.ld48.util.TileLoader;
 
 
 /**
@@ -17,14 +20,17 @@ public class ScriptedBee1 implements Entity{
     Location loc;
     boolean draw;
     boolean phys;
+    TileLoader spriteSheet;
     Location AINode1;
     Location AINode2;
+    private HashMap<Integer, TexInfo> tiles;
     public ScriptedBee1(Location loc, boolean draw, boolean physics, Location AINode1, Location AINode2){
         this.loc = loc;
         this.draw = draw;
         this.phys = physics;
-        this.AINode1 = AINode1;
-        this.AINode2 = AINode2;
+        spriteSheet = new TileLoader("bee.png");
+        tiles = new HashMap<Integer, TexInfo>();
+        tiles.put(0, new TexInfo(0, "Down", 0, 0, 8, 8));
     }
     public Game getGame(){
         return loc.getGame();

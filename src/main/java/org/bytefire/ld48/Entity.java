@@ -12,6 +12,8 @@ public interface Entity {
     double getY();
 
     double getZ();
+    
+    int health();
 
     Location getLoc();
 

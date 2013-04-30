@@ -108,7 +108,36 @@ public class Game{
     }
 
     private void initEntities(){
-
+        if(currentLevel==1){
+            gameEntities.add(new FreeTermite(new Location(this, 160, 72, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 240, 40, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 200, 112, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 224, 96, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 144, 208, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 200, 216, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 200, 200, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 232, 192, 0), true, true));
+            gameEntities.add(new FreeTermite(new Location(this, 88, 176, 0), true, true));
+            gameEntities.add(new FreeBigAnt(new Location(this, 176, 240, 0), true, true));
+        }
+        else{
+            gameEntities.add(new FreeAnt(new Location(this, 448, 32, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 416, 32, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 392, 24, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 360, 16, 0), true, true));
+            gameEntities.add(new ScriptedBee1(new Location(this, 448, 88, 0), true, true, new Location(this, 448, 88, 0), new Location(this, 472, 88, 0)));
+            gameEntities.add(new ScriptedBee1(new Location(this, 272, 184, 0), true, true, new Location(this, 272, 184, 0), new Location(this, 296, 184, 0)));
+            gameEntities.add(new FreeAnt(new Location(this, 432, 168, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 480, 184, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 432, 232, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 424, 256, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 376, 240, 0), true, true));
+            gameEntities.add(new FreeAnt(new Location(this, 336, 272, 0), true, true));
+            gameEntities.add(new FreeBigAnt(new Location(this, 384, 176, 0), true, true));
+            
+            
+        }
+        
     }
 
     private void doPhysics(float i){
