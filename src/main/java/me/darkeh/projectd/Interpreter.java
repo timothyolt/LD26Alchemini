@@ -23,32 +23,43 @@ public class Interpreter {
     public static void main(String[] args){
         FileInputStream file11 = null;
         FileInputStream file12 = null;
+        FileInputStream file13 = null;
         FileInputStream file21 = null;
         FileInputStream file22 = null;
+        FileInputStream file23 = null;
         try {
             file11 = new FileInputStream("level1-1.txt");
             file12 = new FileInputStream("level1-2.txt");
+            file13 = new FileInputStream("level1-3.txt");
             file21 = new FileInputStream("level2-1.txt");
             file22 = new FileInputStream("level2-2.txt");
+            file23 = new FileInputStream("level2-3.txt");
         } catch (FileNotFoundException ex) {}
         InputStreamReader reader11 = null;
         InputStreamReader reader12 = null;
+        InputStreamReader reader13 = null;
         InputStreamReader reader21 = null;
         InputStreamReader reader22 = null;
+        InputStreamReader reader23 = null;
         try {
             reader11 = new InputStreamReader(file11, "UTF-8");
             reader12 = new InputStreamReader(file12, "UTF-8");
+            reader13 = new InputStreamReader(file13, "UTF-8");
             reader21 = new InputStreamReader(file21, "UTF-8");
             reader22 = new InputStreamReader(file22, "UTF-8");
+            reader23 = new InputStreamReader(file23, "UTF-8");
         } catch (UnsupportedEncodingException ex) {System.out.println("Yell at tim for assuming things");}
         byte[][][][] byteArray11 = null;
         byte[][][][] byteArray12 = null;
+        byte[][][][] byteArray13 = null;
         byte[][][][] byteArray21 = null;
         byte[][][][] byteArray22 = null;
+        byte[][][][] byteArray23 = null;
 
 
 
-        for (int i = 0; i < 4; i++){
+
+        for (int i = 0; i < 6; i++){
             InputStreamReader reader = null;
             switch(i){
                 case 0:
@@ -58,10 +69,16 @@ public class Interpreter {
                     reader = reader12;
                     break;
                 case 2:
-                    reader = reader21;
+                    reader = reader13;
                     break;
                 case 3:
+                    reader = reader21;
+                    break;
+                case 4:
                     reader = reader22;
+                    break;
+                case 5:
+                    reader = reader23;
                 default:
             }
 
@@ -89,10 +106,16 @@ public class Interpreter {
                     byteArray12 = byteArray;
                     break;
                 case 2:
-                    byteArray21 = byteArray;
+                    byteArray13 = byteArray;
                     break;
                 case 3:
+                    byteArray21 = byteArray;
+                    break;
+                case 4:
                     byteArray22 = byteArray;
+                    break;
+                case 5:
+                    byteArray23 = byteArray;
                 default:
             }
         }
@@ -207,8 +230,11 @@ public class Interpreter {
         textures.put(99, new TexInfo(99, "WaterTrans11", 64, 72, 72, 80));
         textures.put(100, new TexInfo(100, "WaterTrans12", 72, 72, 80, 80));
 
-
-
+        HashMap<Integer, TexInfo> materials = new HashMap<Integer, TexInfo>();
+        materials.put(1, new TexInfo(1, "Solid", 0, 0, 8, 8));
+        materials.put(2, new TexInfo(2, "Destrucible", 8, 0, 16, 8));
+        materials.put(3, new TexInfo(3, "Small", 16, 0, 24, 8));
+        materials.put(4, new TexInfo(4, "Big", 24, 0, 32, 8));
 
         Level level11 = new Level((short)11,textures , 64, 64);
         level11.setIDs(byteArray11);
@@ -222,6 +248,12 @@ public class Interpreter {
         Asset asset12 = new Asset("Level1-2.d", false);
         asset12.write(level12);
 
+        Level level13 = new Level((short)13, materials, 64, 64);
+        level13.setIDs(byteArray13);
+        level13.printIds();
+        Asset asset13 = new Asset("Level1-3.d", false);
+        asset13.write(level13);
+
         Level level21 = new Level((short)21, textures, 64, 64);
         level21.setIDs(byteArray21);
         level21.printIds();
@@ -233,5 +265,11 @@ public class Interpreter {
         level22.printIds();
         Asset asset22 = new Asset("Level2-2.d", false);
         asset22.write(level22);
+
+        Level level23 = new Level((short)23, materials, 64, 64);
+        level23.setIDs(byteArray23);
+        level23.printIds();
+        Asset asset23 = new Asset("Level2-3.d", false);
+        asset23.write(level23);
     }
 }

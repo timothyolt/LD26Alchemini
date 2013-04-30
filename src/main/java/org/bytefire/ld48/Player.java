@@ -1,6 +1,7 @@
 package org.bytefire.ld48;
 
 import java.util.HashMap;
+import me.darkeh.projectd.assets.Level;
 import me.darkeh.projectd.assets.TexInfo;
 import org.bytefire.ld48.Game.KeyState;
 import org.bytefire.ld48.util.Location;
@@ -86,10 +87,50 @@ public class Player implements Entity{
     public void doPhysics(Game game){
         if (phys){
             final int speed = 2;
-            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed) setX(getX()-speed);
-            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed) setX(getX()+speed);
-            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed) setY(getY()+speed);
-            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed) setY(getY()-speed);
+            Location dummy = new Location(game,
+                ((loc.getX() * -1/2) + 76)/4,
+                ((loc.getY() * -1/2) + 60)/4, 0);
+            Level physicsLayer = game.getPhysicsLayer();
+            System.out.println(Double.toString(Math.abs(dummy.getX())) + ", " + Double.toString(Math.abs(dummy.getY())));
+
+            if (game.getKey(Keyboard.KEY_D) == KeyState.Pressed){
+                TexInfo flag1 = physicsLayer.getTextureFromGrid(
+                        (int)Math.abs(Math.floor(dummy.getX())-1),
+                        (int)Math.abs(Math.floor(dummy.getY())));
+                TexInfo flag2 = physicsLayer.getTextureFromGrid(
+                        (int)Math.abs(Math.floor(dummy.getX())-1),
+                        (int)Math.abs(Math.ceil(dummy.getY())));
+                if ((flag1 == null || flag1.getID() == 0)&&(flag2 == null || flag2
+                        .getID() == 0)) setX(getX()-speed);
+                else System.out.println(Double.toString(Math.abs(dummy.getX()-1)) + ", " + Double.toString(Math.abs(dummy.getY())));
+
+                setX(getX()-speed);
+            }
+
+            if (game.getKey(Keyboard.KEY_A) == KeyState.Pressed){
+//                TexInfo flag = physicsLayer.getTextureFromGrid((int)Math.abs(dummy.getX()+1), (int)Math.abs(dummy.getY()));
+//                if (flag == null || flag.getID() == 0) setX(getX()+speed);
+//                else System.out.println(Double.toString(Math.abs(dummy.getX()+1)) + ", " + Double.toString(Math.abs(dummy.getY())));
+
+                setX(getX()+speed);
+            }
+
+            if (game.getKey(Keyboard.KEY_W) == KeyState.Pressed){
+//                TexInfo flag = physicsLayer.getTextureFromGrid((int)Math.abs(dummy.getX()), (int)Math.abs(dummy.getY()+1));
+//                if (flag == null || flag.getID() == 0) setY(getY()+speed);
+//                else System.out.println(Double.toString(Math.abs(dummy.getX())) + ", " + Double.toString(Math.abs(dummy.getY()+1)));
+
+                setY(getY()+speed);
+            }
+
+            if (game.getKey(Keyboard.KEY_S) == KeyState.Pressed){
+//                TexInfo flag = physicsLayer.getTextureFromGrid((int)Math.abs(dummy.getX()), (int)Math.abs(dummy.getY()-1));
+//                if (flag == null || flag.getID() == 0) setY(getY()-speed);
+//                else System.out.println(Double.toString(Math.abs(dummy.getX()-1)) + ", " + Double.toString(Math.abs(dummy.getY()-1)));
+
+                setY(getY()-speed);
+            }
+
         }
     }
 

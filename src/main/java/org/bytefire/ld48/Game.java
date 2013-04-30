@@ -1,8 +1,13 @@
 package org.bytefire.ld48;
 
 import java.util.ArrayList;
+import me.darkeh.projectd.assets.Asset;
+import me.darkeh.projectd.assets.Level;
 import org.bytefire.ld48.util.Camera;
 import org.bytefire.ld48.util.Camera.LevelID;
+import static org.bytefire.ld48.util.Camera.LevelID.ONE;
+import static org.bytefire.ld48.util.Camera.LevelID.TEST;
+import static org.bytefire.ld48.util.Camera.LevelID.TWO;
 import org.bytefire.ld48.util.Location;
 import org.bytefire.ld48.util.Rect;
 import org.bytefire.ld48.util.Sprite;
@@ -23,6 +28,7 @@ public class Game{
     private final int width;
     private final int viewHeight;
     private final int viewWidth;
+    private LevelID currentLevel;
     private Camera cam;
 
     private Game(){
@@ -35,7 +41,7 @@ public class Game{
         width = 640;
         viewHeight = 120;
         viewWidth = 160;
-        gameEntities.add(new Player(new Location(this, 100D, 100D, 1D), true, true));
+        gameEntities.add(new Player(new Location(this, 80D, 80D, 1D), true, true));
         cam = new Camera(new Rect(this, 0, 0, viewHeight, viewWidth), gameEntities.get(0));
     }
 
@@ -90,6 +96,11 @@ public class Game{
         GL11.glViewport(0, 0, width, height);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+        currentLevel = LevelID.TEST;
+    }
+
+    public LevelID getCurrentLevel(){
+        return currentLevel;
     }
 
     public Player getPlayer(){
@@ -107,9 +118,21 @@ public class Game{
         }
     }
 
+    public Level getPhysicsLayer(){
+        switch(currentLevel){
+            case TEST:
+            case ONE:
+                return (Level)(new Asset("Level1-3.d", true).read());
+            case TWO:
+                return (Level)(new Asset("Level2-3.d", true).read());
+            default:
+        }
+        return null;
+    }
+
     private void doDraw(float i){
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        cam.drawMap(LevelID.TEST);
+        cam.drawMap(currentLevel);
         for (Entity e: gameEntities){
             e.drawEntity(this);
         }

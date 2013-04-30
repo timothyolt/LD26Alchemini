@@ -45,6 +45,8 @@ public class Camera{
                 layer2 = (Level)(new Asset("Level1-2.d", true).read());
                 break;
             case TWO:
+                layer1 = (Level)(new Asset("Level2-1.d", true).read());
+                layer2 = (Level)(new Asset("Level2-2.d", true).read());
                 break;
             default:
         }
