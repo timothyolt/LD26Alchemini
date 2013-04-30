@@ -4,23 +4,31 @@
  */
 package org.bytefire.ld48;
 
+import java.util.HashMap;
+import me.darkeh.projectd.assets.TexInfo;
 import org.bytefire.ld48.util.Location;
 import org.bytefire.ld48.util.Sprite;
+import org.bytefire.ld48.util.TileLoader;
 
 
 /**
  *
  * @author kendall
  */
-public class FreeMouse implements Entity{
+public class FreeBigAnt implements Entity{
     
     Location loc;
     boolean draw;
     boolean phys;
-    public FreeMouse(Location loc, boolean draw, boolean physics){
+    TileLoader spriteSheet;
+    private HashMap<Integer, TexInfo> tiles;
+    public FreeBigAnt(Location loc, boolean draw, boolean physics){
         this.loc = loc;
         this.draw = draw;
         this.phys = physics;
+        spriteSheet = new TileLoader("bigAnt.png");
+        tiles = new HashMap<Integer, TexInfo>();
+        tiles.put(0, new TexInfo(0, "Down", 0, 0, 8, 8));
     }
     public Game getGame(){
         return loc.getGame();
@@ -68,7 +76,7 @@ public class FreeMouse implements Entity{
 
     public void drawEntity(Game game){
         if (draw){
-            Sprite spr = game.getSprite("ant.png");
+            Sprite spr = game.getSprite("bigAnt.png");
             spr.draw((int)getX(), (int)getY());
         }
     }
@@ -82,20 +90,27 @@ public class FreeMouse implements Entity{
     }
     
     public void doPhysics(Game game){
-        if (phys){
+        if (phys){            
             if (game.getView().onScreen(this)){
-                if(game.getEntities().get(0).getX()>getX()) setX(getX()+5);
-                if(game.getEntities().get(0).getX()<getX()) setX(getX()-5);
-                if(game.getEntities().get(0).getY()>getY()) setY(getY()+5);
-                if(game.getEntities().get(0).getY()>getY()) setY(getY()-5);
-                
-                
+                boolean termite = false;
+                FreeTermite termiteInstance= null;
+                for (Entity e: game.getEntities()){
+                    if (e instanceof FreeTermite) termite = true;
+                }
+                if (termite && game.getView().onScreen(termiteInstance)){
+                    if(termiteInstance.getX()>getX()) setX(getX()+5);
+                    if(termiteInstance.getX()<getX()) setX(getX()-5);
+                    if(termiteInstance.getY()>getY()) setY(getY()+5);
+                    if(termiteInstance.getY()>getY()) setY(getY()-5);
+                }
+                else{
+                    if(game.getEntities().get(0).getX()>getX()) setX(getX()+5);
+                    if(game.getEntities().get(0).getX()<getX()) setX(getX()-5);
+                    if(game.getEntities().get(0).getY()>getY()) setY(getY()+5);
+                    if(game.getEntities().get(0).getY()>getY()) setY(getY()-5);
+                }
             }
         }
-    }        
-        
-    private void idleAI(){
-        
     }
 
     public void destroy(Game game){
@@ -111,6 +126,10 @@ public class FreeMouse implements Entity{
     }
 
     public int getPotionTicks() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int health() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
