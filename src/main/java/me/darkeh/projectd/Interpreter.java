@@ -216,19 +216,19 @@ public class Interpreter {
         Asset asset11 = new Asset("Level1-1.d", false);
         asset11.write(level11);
 
-        Level level12 = new Level((short)12, new HashMap<Integer, TexInfo>(), 64, 64);
+        Level level12 = new Level((short)12, textures, 64, 64);
         level12.setIDs(byteArray12);
         level12.printIds();
         Asset asset12 = new Asset("Level1-2.d", false);
         asset12.write(level12);
 
-        Level level21 = new Level((short)21, new HashMap<Integer, TexInfo>(), 64, 64);
+        Level level21 = new Level((short)21, textures, 64, 64);
         level21.setIDs(byteArray21);
         level21.printIds();
         Asset asset21 = new Asset("Level2-1.d", false);
         asset21.write(level21);
 
-        Level level22 = new Level((short)22, new HashMap<Integer, TexInfo>(), 64, 64);
+        Level level22 = new Level((short)22, textures, 64, 64);
         level22.setIDs(byteArray22);
         level22.printIds();
         Asset asset22 = new Asset("Level2-2.d", false);

@@ -40,10 +40,9 @@ public class Camera{
         Level layer2 = null;
         switch(levelID){
             case TEST:
+            case ONE:
                 layer1 = (Level)(new Asset("Level1-1.d", true).read());
                 layer2 = (Level)(new Asset("Level1-2.d", true).read());
-                break;
-            case ONE:
                 break;
             case TWO:
                 break;
@@ -58,15 +57,18 @@ public class Camera{
         for (int x = 0; x < 64; x++)
         for (int y = 0; y < 64; y++){
             if (Math.floor(dummy.distance(x * 4, y * 4)) < 55){
-                TexInfo t1;
-                t1 = layer1.getTextureFromGrid(Math.abs(x), Math.abs(y));
-                Tile tile1 = new Tile(terrain, t1);
-                tile1.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+                TexInfo t1 = layer1.getTextureFromGrid(Math.abs(x), Math.abs(y));
+                TexInfo t2 = layer2.getTextureFromGrid(Math.abs(x), Math.abs(y));
 
-                TexInfo t2;
-                t2 = layer2.getTextureFromGrid(Math.abs(x), Math.abs(y));
-                Tile tile2 = new Tile(terrain, t2);
-                tile2.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+                if (t1 != null && t1.getID() != 0){
+                    Tile tile1 = new Tile(terrain, t1);
+                    tile1.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+                }
+
+                if (t2 != null && t2.getID() != 0){
+                    Tile tile2 = new Tile(terrain, t2);
+                    tile2.draw((int)view.getPoint1().getX() + (x * 8), (int)view.getPoint1().getY() + (y * 8));
+                }
             }
         }
     }
