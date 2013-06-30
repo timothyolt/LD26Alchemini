@@ -1,4 +1,4 @@
-package org.bytefire.ld48.util;
+ package org.bytefire.ld48.util;
 
 import java.awt.Color;
 import java.awt.Graphics;

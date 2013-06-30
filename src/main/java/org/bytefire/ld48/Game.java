@@ -78,7 +78,11 @@ public class Game{
         Display.setTitle("Cow");
         Display.setDisplayMode(new DisplayMode(width,height));
         Display.create();
-        } catch (LWJGLException e) {}
+        } catch (LWJGLException e) {
+            System.out.println("ERROR: Display could not intialize");
+            e.printStackTrace(System.out);
+            System.exit(0);
+        }
 
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -108,7 +112,7 @@ public class Game{
     }
 
     private void initEntities(){
-        if(currentLevel==1){
+        if (currentLevel==LevelID.ONE){
             gameEntities.add(new FreeTermite(new Location(this, 160, 72, 0), true, true));
             gameEntities.add(new FreeTermite(new Location(this, 240, 40, 0), true, true));
             gameEntities.add(new FreeTermite(new Location(this, 200, 112, 0), true, true));
@@ -120,7 +124,7 @@ public class Game{
             gameEntities.add(new FreeTermite(new Location(this, 88, 176, 0), true, true));
             gameEntities.add(new FreeBigAnt(new Location(this, 176, 240, 0), true, true));
         }
-        else{
+        else if (currentLevel==LevelID.TWO){
             gameEntities.add(new FreeAnt(new Location(this, 448, 32, 0), true, true));
             gameEntities.add(new FreeAnt(new Location(this, 416, 32, 0), true, true));
             gameEntities.add(new FreeAnt(new Location(this, 392, 24, 0), true, true));
